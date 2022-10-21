@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "Kivy_Boiler"
+name = "Project_Ynix"
 version = "0.1.0"
 description = "???"
 authors = [
     "Josh S Wilkinson <JoshsWilkinson@Outlook.com>",
 ]
 readme = "README.md"
-repository = "https://github.com/Phelsong/Kivy_BoilerV1"
+repository = "https://github.com/Phelsong/ynix_app"
 packages = [
     { include = "pages" },
     { include = "src" },
@@ -29,4 +29,4 @@ requires = [
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-start_dev = 'main:RedMoon().run()'
+start_dev = 'main:ProjectYnix().run()'
