@@ -16,7 +16,7 @@ packages = [
 python = "^3.10.6"
 pendulum = "^2.1"
 Kivy = "^2.1.0"
-httpx = "^0.23.0"
+httpx = {extras = ["http2"], version = "^0.23.0"}
 ujson = "^5.5.0"
 
 [tool.poetry.dev-dependencies]

@@ -1,6 +1,5 @@
 # Project_Ynix
 
-
 ## Stack
 
 * Kivy
