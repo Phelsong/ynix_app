@@ -1,4 +1,4 @@
-<SplashScreen>:
+<SplashScreen>: #:kivy
     AnchorLayout:
         # layout_hint_with_bounds(sh_sum, available_space, min_bounded_size, sh_min_vals, sh_max_vals, hint)
         padding: 50
@@ -28,6 +28,7 @@
             size_hint: (.1, .125)
             width: 200
             height: 125
+            pos_hint: {'center_x': .2, 'center_y': .9}
             anchor_x: 'right'
             anchor_y: 'center'
             valign: 'center'

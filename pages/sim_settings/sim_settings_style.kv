@@ -1,5 +1,5 @@
-<SimSettingsScreen>:
-    AnchorLayout:
+<SimSettingsScreen>: #:kivy
+    BoxLayout:
         # layout_hint_with_bounds(sh_sum, available_space, min_bounded_size, sh_min_vals, sh_max_vals, hint)
         padding: 50
         Label:
@@ -12,18 +12,6 @@
             text: "Sim Settings"
             text_size: self.width-40, self.height-40
             background_color: "green"
-        Label: 
-            size_hint: (.1, .1)
-            text: "User Name"
-            text_size: self.width-30, self.height-30
-            valign: 'center'
-            halign: 'center'
-            background: "blue"
-        TextInput:
-            multiline: False
-            size_hint: (.15, .1)
-            valign: 'center'
-            halign: 'center'
         Button:
             size_hint: (.2, .125)
             width: 200
@@ -32,7 +20,8 @@
             anchor_y: 'center'
             valign: 'center'
             halign: 'center'
-            text: "Login"
+            text: "Nav>Login"
             text_size: self.width-40, self.height-40
             background: "grey"
             on_release: root.manager.current = 'SplashScreen'
+        
