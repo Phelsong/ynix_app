@@ -20,10 +20,12 @@ class SimSettingsScreen(Screen):
         super(SimSettingsScreen, self).__init__(**kwargs)
         # --
         self.form = AttackerInput(
-            padding=50,
-            size_hint=(.8, 0.15),
-            width=900,
-            orientation="lr-tb",
+            columns=1,
+            rows=24,
+            padding=20,
+            size_hint=(0.8, 0.2),
+            pos_hint={"center_x": 0.5, "center_y": 0.5},
+            width=500,
             spacing=[30, 30],
         )
         self.add_widget(self.form)

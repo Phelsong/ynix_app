@@ -1,9 +1,9 @@
-
-from kivy.uix.stacklayout import StackLayout
+from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
 
-class AttackerInput(StackLayout):
-     def __init__(self, **kwargs):
+
+class AttackerInput(GridLayout):
+    def __init__(self, **kwargs):
         super(AttackerInput, self).__init__(**kwargs)
         # --
         self.class_id = TextInput(
