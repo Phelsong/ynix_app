@@ -1,9 +1,11 @@
 """SplashScreen"""
 # libs
 import os
+from turtle import onrelease
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
 from kivy.uix.textinput import TextInput
+from kivy.uix.button import Button
 from kivy.uix.label import Label
 
 # local imports
@@ -18,6 +20,7 @@ class SimSettingsScreen(Screen):
 
     def __init__(self, **kwargs):
         super(SimSettingsScreen, self).__init__(**kwargs)
+
         # --
         self.form = AttackerInput(
             columns=1,

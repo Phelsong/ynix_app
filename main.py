@@ -19,12 +19,13 @@ Builder.load_file(f"{os.getcwd()}\\app_shell.kv")
 
 class ProjectYnix(App):
     """Application"""
+
     def build(self):
-        s_man = ScreenManager()
-        s_man.add_widget(SplashScreen(name='SplashScreen'))
-        s_man.add_widget(LoginScreen(name='LoginScreen'))
-        s_man.add_widget(SimSettingsScreen(name='SimSettingsScreen'))
-        return s_man
+        screen_man = ScreenManager()
+        screen_man.add_widget(SplashScreen(name="SplashScreen"))
+        screen_man.add_widget(LoginScreen(name="LoginScreen"))
+        screen_man.add_widget(SimSettingsScreen(name="SimSettingsScreen"))
+        return screen_man
 
 
 if __name__ == "__main__":
