@@ -1,9 +1,11 @@
 """SplashScreen"""
 # libs
 import os
+from turtle import onrelease
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
 from kivy.uix.textinput import TextInput
+from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 
@@ -15,6 +17,7 @@ from .attacker_settings_form import AttackerInput
 
 class SimSettingsScreen(Screen):
     """Sim Settings Page"""
+
     Builder.load_file(f"{os.getcwd()}\\pages\\sim_settings\\sim_settings_style.kv")
 
     def __init__(self, **kwargs):
