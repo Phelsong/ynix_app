@@ -7,21 +7,25 @@ from kivy.uix.screenmanager import Screen
 from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
 from kivy.uix.label import Label
+from kivy.uix.button import Button
 
 # local imports
 from .attacker_settings_form import AttackerInput
 
 # =============================================================================
-Builder.load_file(f"{os.getcwd()}\\pages\\sim_settings\\sim_settings_style.kv")
 
 
 class SimSettingsScreen(Screen):
     """Sim Settings Page"""
 
+    Builder.load_file(f"{os.getcwd()}\\pages\\sim_settings\\sim_settings_style.kv")
+
     def __init__(self, **kwargs):
         super(SimSettingsScreen, self).__init__(**kwargs)
 
-        # --
+        # -----------]
+        self.ids.submit_button.text = "Class"
+        # ----------]
         self.form = AttackerInput(
             columns=1,
             rows=24,

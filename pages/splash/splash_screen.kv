@@ -5,29 +5,41 @@
         columns: 3
         padding: 50
         Label:
+            id: title1
             width: 300
             valign: 'top'
             halign: 'center'
-            text: "Welcome to ~Red Moon~"
-            text_size: self.width-40, self.height-40
+            text: "Welcome to ~Project Ynix~"
+            text_size: self.width-5, self.height-5
             background_color: "green"
         Button:
+            id: login_nav
             text: "Login"
             size_hint: (.2, .125)
             width: 200
             height: 125
             valign: 'center'
             halign: 'center'
-            text_size: self.width-40, self.height-40
             background: "grey"
             on_release: root.manager.current = 'LoginScreen'
         Button:
+            id: sim_nav
             size_hint: (.1, .125)
             width: 200
             height: 125
             valign: 'center'
             halign: 'center'
             text: "Sim Settings"
-            text_size: self.width-40, self.height-40
             background: "grey"
             on_release: root.manager.current = 'SimSettingsScreen'
+        Button:
+            id: wiki_nav
+            size_hint: (.1, .125)
+            width: 200
+            height: 125
+            valign: 'center'
+            halign: 'center'
+            text: "Wiki"
+            background: "grey"
+            on_release: root.manager.current = 'WikiScreen'
+
