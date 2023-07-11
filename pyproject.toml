@@ -13,9 +13,9 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.10.6,<3.11"
+python = ">=3.10.6,<3.123"
 pendulum = "^2.1"
-Kivy = ">=2.1.0" # Kivy 2.1 doesnt build with py3.11 (yet)
+Kivy = ">=2.2.1" # Kivy 2.1 doesnt build with py3.11 (yet)
 httpx = {extras = ["http2"], version = "^0.23.0"}
 ujson = "^5.5.0"
 
