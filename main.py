@@ -1,6 +1,7 @@
 """ Application File """
 # libs
 import os
+from asyncio import run
 import kivy
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
@@ -16,37 +17,42 @@ from pages.sim_settings.sim_settings_screen import SimSettingsScreen
 from pages.wiki.wiki import WikiScreen
 
 # =============================================================================
+CATALOG_ROOT = os.path.dirname(__file__)
 
 
 class AppShell(GridLayout):
     """Root Widget"""
-    Builder.load_file(f"{os.getcwd()}\\app_shell.kv")
-    screen_manager = ObjectProperty(ScreenManager())
 
     columns = 1
     rows = 2
-    #
+    screen_manager = ScreenManager()
+    screen_manager.add_widget(SplashScreen(name="SplashScreen"))
+    screen_manager.add_widget(LoginScreen(name="LoginScreen"))
+    screen_manager.add_widget(SimSettingsScreen(name="SimSettingsScreen"))
+    screen_manager.add_widget(WikiScreen(name="WikiScreen"))
+    # -----------
+    Builder.load_file(f"{os.getcwd()}\\app_shell.kv")
 
     def __init__(self, **kwargs) -> None:
         super(AppShell, self).__init__(**kwargs)
-        # self.screen_manager.add_widget(SplashScreen(name="SplashScreen"))
-        self.screen_manager.add_widget(LoginScreen(name="LoginScreen"))
-        self.screen_manager.add_widget(SimSettingsScreen(name="SimSettingsScreen"))
-        self.screen_manager.add_widget(WikiScreen(name="WikiScreen"))
         #
+        self.add_widget(self.screen_manager)
         self.ids.selector.values = [
             screen.name for screen in self.screen_manager.screens
         ]
         self.ids.selector.bind(text=self.change_screen)
 
     def change_screen(self, instance, value):
-        self.screen_manager.current = "SplashScreen"
+        self.screen_manager.current = value
 
 
 class ProjectYnix(App):
     def build(self):
         return AppShell()
 
+    def on_pause(self):
+        return True
+
 
 if __name__ == "__main__":
-    ProjectYnix().run()
+    run(ProjectYnix().async_run())
