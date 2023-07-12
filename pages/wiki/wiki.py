@@ -10,3 +10,4 @@ Builder.load_file(f"{os.getcwd()}\\pages\\wiki\\wiki.kv")
 
 class WikiScreen(Screen):
     """Splash Page"""
+    

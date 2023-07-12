@@ -2,13 +2,16 @@
 # libs
 import os
 from asyncio import run
-import kivy
+
+# kivy imports
 from kivy.app import App
+from kivy.config import Config
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.screenmanager import ScreenManager, ShaderTransition
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
+
 
 # local imports
 from pages.splash.splash_screen import SplashScreen
@@ -48,6 +51,7 @@ class AppShell(GridLayout):
 
 class ProjectYnix(App):
     def build(self):
+        self.config = Config
         return AppShell()
 
     def on_pause(self):
