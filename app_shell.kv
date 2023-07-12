@@ -1,17 +1,16 @@
 <AppShell>:
     BoxLayout:
         id: bar
-        padding: '2sp'
+        orientation: 'vertical'
+        padding: '.5sp'
+        size_hint: .06, 1
         canvas:
             Color:
-                rgba: 1, 1, 1, .6
+                rgba: 1, 1, 1, .4
             Rectangle:
                 size: self.size
                 pos: self.pos
-        size_hint: 1, None
-        height: '45sp'
         Spinner:
             id: selector
-            size_hint: None, 1
+            size_hint: 1, 0
             text: 'Welcome'
-        

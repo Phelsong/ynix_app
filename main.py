@@ -26,8 +26,8 @@ CATALOG_ROOT = os.path.dirname(__file__)
 class AppShell(GridLayout):
     """Root Widget"""
 
-    columns = 1
-    rows = 2
+    columns = 2
+    rows = 1
     screen_manager = ScreenManager()
     screen_manager.add_widget(SplashScreen(name="SplashScreen"))
     screen_manager.add_widget(LoginScreen(name="LoginScreen"))
