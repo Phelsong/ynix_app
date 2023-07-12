@@ -1,5 +1,19 @@
+# Byte-compiled / optimized / DLL files / compiles
+__pycache__/
+*.py[cod]
 .venv
-__pycache__/*
-.env
-3
-/__pycache__/
+build/**
+.pytest_cache/
+*.css.map
+.mypy_cache\*
+
+
+# Distribution / packaging
+.python-version
+uploads/*.stl
+temp/*.tap
+logs/*.db
+
+# OS X
+.DS_Store
+*.orig
