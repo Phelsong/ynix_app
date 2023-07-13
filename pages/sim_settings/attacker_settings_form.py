@@ -78,3 +78,4 @@ class AttackerInput(GridLayout):
         self.human_damage_debuffs = TextInput()
         self.add_widget(self.human_damage_debuffs, index=21)
         # --
+``
