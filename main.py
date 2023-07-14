@@ -58,5 +58,5 @@ class ProjectYnix(App):
         return True
 
 
-if __name__ == "__main__":2222222222
+if __name__ == "__main__":
     run(ProjectYnix().async_run())
