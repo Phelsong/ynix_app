@@ -22,7 +22,6 @@ from pages.wiki.wiki import WikiScreen
 # =============================================================================
 CATALOG_ROOT = os.path.dirname(__file__)
 
-
 class AppShell(GridLayout):
     """Root Widget"""
 
