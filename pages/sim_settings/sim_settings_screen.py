@@ -18,7 +18,7 @@ from .attacker_settings_form import AttackerInput
 class SimSettingsScreen(Screen):
     """Sim Settings Page"""
 
-    Builder.load_file(f"{os.getcwd()}\\pages\\sim_settings\\sim_settings_style.kv")
+    Builder.load_file(f"{os.getcwd()}/pages/sim_settings/sim_settings_style.kv")
 
     def __init__(self, **kwargs):
         super(SimSettingsScreen, self).__init__(**kwargs)

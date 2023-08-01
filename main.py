@@ -33,7 +33,7 @@ class AppShell(GridLayout):
     screen_manager.add_widget(SimSettingsScreen(name="SimSettingsScreen"))
     screen_manager.add_widget(WikiScreen(name="WikiScreen"))
     # -----------
-    Builder.load_file(f"{os.getcwd()}\\app_shell.kv")
+    Builder.load_file(f"{os.getcwd()}/app_shell.kv")
 
     def __init__(self, **kwargs) -> None:
         super(AppShell, self).__init__(**kwargs)
