@@ -22,6 +22,7 @@ from pages.wiki.wiki import WikiScreen
 # =============================================================================
 CATALOG_ROOT = os.path.dirname(__file__)
 
+
 class AppShell(GridLayout):
     """Root Widget"""
 
@@ -44,16 +45,16 @@ class AppShell(GridLayout):
         ]
         self.ids.selector.bind(text=self.change_screen)
 
-    def change_screen(self, instance, value):
+    def change_screen(self, instance, value) -> None:
         self.screen_manager.current = value
 
 
 class ProjectYnix(App):
-    def build(self):
+    def build(self) -> AppShell:
         self.config = Config
         return AppShell()
 
-    def on_pause(self):
+    def on_pause(self) -> bool:
         return True
 
 
