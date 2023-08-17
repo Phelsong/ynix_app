@@ -16,7 +16,7 @@ from kivy.uix.screenmanager import Screen
 class WikiScreen(Screen):
     """Splash Page"""
 
-    # Builder.load_file(f"{os.getcwd()}/pages/wiki/wiki.kv")
+    # Builder.load_file(f"{os.getcwd()}/kv/wiki.kv")
     layout = StackLayout(orientation="lr-tb", spacing=[10, 10])
     title = Label(text="Test Wiki Page", font_size="18sp")
     button = Button(
@@ -28,5 +28,6 @@ class WikiScreen(Screen):
     def __init__(self, **kwargs):
         super(WikiScreen, self).__init__(**kwargs)
 
+        self.add_widget(self.layout)
         self.add_widget(widget=self.title)
         self.add_widget(widget=self.button)

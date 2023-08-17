@@ -14,39 +14,30 @@ from kivy.properties import ObjectProperty
 
 
 # local imports
-from pages.splash.splash_screen import SplashScreen
-from pages.login.login_screen import LoginScreen
-from pages.sim_settings.sim_settings_screen import SimSettingsScreen
-from pages.wiki.wiki import WikiScreen
+from pages.screen_manager import screen_manager, change_screen
 
 # =============================================================================
-CATALOG_ROOT = os.path.dirname(__file__)
+CATALOG_ROOT: str = os.path.dirname(__file__)
 
 
 class AppShell(GridLayout):
     """Root Widget"""
 
-    columns = 2
-    rows = 1
-    screen_manager = ScreenManager()
-    screen_manager.add_widget(SplashScreen(name="SplashScreen"))
-    screen_manager.add_widget(LoginScreen(name="LoginScreen"))
-    screen_manager.add_widget(SimSettingsScreen(name="SimSettingsScreen"))
-    screen_manager.add_widget(WikiScreen(name="WikiScreen"))
+    columns: int = 2
+    rows: int = 1
+
     # -----------
-    Builder.load_file(f"{os.getcwd()}/app_shell.kv")
+    Builder.load_file(f"{os.getcwd()}/kv/app_shell.kv")
 
     def __init__(self, **kwargs) -> None:
         super(AppShell, self).__init__(**kwargs)
         #
-        self.add_widget(self.screen_manager)
-        self.ids.selector.values = [
-            screen.name for screen in self.screen_manager.screens
-        ]
-        self.ids.selector.bind(text=self.change_screen)
+        self.add_widget(screen_manager)
+        self.ids.selector.values = [screen.name for screen in screen_manager.screens]
+        self.ids.selector.bind(text=change_screen)
 
-    def change_screen(self, instance, value) -> None:
-        self.screen_manager.current = value
+
+# =============================================================================
 
 
 class ProjectYnix(App):
@@ -57,6 +48,8 @@ class ProjectYnix(App):
     def on_pause(self) -> bool:
         return True
 
+
+# =============================================================================
 
 if __name__ == "__main__":
     run(ProjectYnix().async_run())

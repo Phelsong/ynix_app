@@ -95,10 +95,11 @@ from importlib import import_module
 from kivy.garden.xpopup import XProgress, XError
 
 
-__author__ = 'ophermit'
+__author__ = "ophermit"
 
 
-Builder.load_string('''
+Builder.load_string(
+    """
 #:kivy 1.9.1
 #:import metrics kivy.metrics
 
@@ -154,30 +155,29 @@ Builder.load_string('''
             width: metrics.dp(100)
             text: 'Load doc'
             on_release: root.load_doc()
-''')
+"""
+)
 
-NO_DOC_STR = 'No documentation found'
+NO_DOC_STR = "No documentation found"
 
 
 class ObjectInspectorLabel(TreeViewLabel):
-    """Represents a node in the object inspector. For internal use only.
-    """
+    """Represents a node in the object inspector. For internal use only."""
 
-    doc = StringProperty('')
-    '''Represents docstring.
+    doc = StringProperty("")
+    """Represents docstring.
 
     :attr:`doc` is a :class:`~kivy.properties.StringProperty` and
     defaults to ''.
-    '''
+    """
 
 
 class ObjectInspector(TreeView):
-    """Object inspector class. For internal use only.
-    """
+    """Object inspector class. For internal use only."""
 
     get_doc = lambda self, x: inspect.getdoc(x) or NO_DOC_STR
-    '''Predicate to get docstrings
-    '''
+    """Predicate to get docstrings
+    """
 
     def __init__(self, **kwargs):
         # generator object
@@ -200,8 +200,10 @@ class ObjectInspector(TreeView):
         """
         return self.add_node(
             ObjectInspectorLabel(
-                text='[ %s (%d) ]' % (title, count), no_selection=True),
-            parent_node)
+                text="[ %s (%d) ]" % (title, count), no_selection=True
+            ),
+            parent_node,
+        )
 
     def _fill_category_node(self, module, obj_filter, title, parent):
         """Creates and fills new category node. Used as a generator
@@ -218,9 +220,9 @@ class ObjectInspector(TreeView):
         category_node = self._create_category_node(title, parent, len(members))
         for entry in members:
             node = self.add_node(
-                ObjectInspectorLabel(text=entry[0],
-                                     doc=self.get_doc(entry[1])),
-                category_node)
+                ObjectInspectorLabel(text=entry[0], doc=self.get_doc(entry[1])),
+                category_node,
+            )
 
             # TODO::OPTIMIZE
             if self.methods:
@@ -232,8 +234,10 @@ class ObjectInspector(TreeView):
                 for method in inspect.getmembers(entry[1], obj_filter):
                     self.add_node(
                         ObjectInspectorLabel(
-                            text=method[0], doc=self.get_doc(method[1])),
-                        node)
+                            text=method[0], doc=self.get_doc(method[1])
+                        ),
+                        node,
+                    )
             yield
 
     def _create_module_node(self, module, parent=None):
@@ -244,57 +248,71 @@ class ObjectInspector(TreeView):
         """
         module_node = self.add_node(
             ObjectInspectorLabel(
-                text='* %s' % module.__name__, doc=self.get_doc(module),
-                is_open=not parent), parent)
+                text="* %s" % module.__name__,
+                doc=self.get_doc(module),
+                is_open=not parent,
+            ),
+            parent,
+        )
         if not parent:
             self.__root_module_node = module_node
 
         # Checking for circular import
         if module.__name__ in self.__submodules:
-            module_node.text += ' (circular)'
+            module_node.text += " (circular)"
             return
         else:
             self.__submodules.append(module.__name__)
         yield
 
         # Processing the submodules
-        pred_submodules = lambda x: inspect.ismodule(x)\
-            and module.__name__ in x.__name__
+        pred_submodules = (
+            lambda x: inspect.ismodule(x) and module.__name__ in x.__name__
+        )
         submodules = inspect.getmembers(module, pred_submodules)
         if submodules:
             submodule_node = self._create_category_node(
-                'Submodules', module_node, len(submodules))
+                "Submodules", module_node, len(submodules)
+            )
             for submodule in submodules:
-                for entry in self._create_module_node(
-                        submodule[1], submodule_node):
+                for entry in self._create_module_node(submodule[1], submodule_node):
                     yield
 
         # Processing the module's members
         categories = [
-            (True, 'Classes', lambda x: inspect.isclass(x)
-                and x.__module__ == module.__name__),
-            (self.functions, 'Functions', lambda x: inspect.isfunction(x)
-                and x.__module__ == module.__name__),
-            (self.imported, 'Imported', lambda x:
-                (inspect.isclass(x) or inspect.isroutine(x))
-                and x.__module__ != module.__name__)
+            (
+                True,
+                "Classes",
+                lambda x: inspect.isclass(x) and x.__module__ == module.__name__,
+            ),
+            (
+                self.functions,
+                "Functions",
+                lambda x: inspect.isfunction(x) and x.__module__ == module.__name__,
+            ),
+            (
+                self.imported,
+                "Imported",
+                lambda x: (inspect.isclass(x) or inspect.isroutine(x))
+                and x.__module__ != module.__name__,
+            ),
         ]
 
         for ctgr in categories:
             if ctgr[0]:
                 for step in self._fill_category_node(
-                        module, ctgr[2], ctgr[1], module_node):
+                    module, ctgr[2], ctgr[1], module_node
+                ):
                     yield
 
     def _fill_tree(self, pdt=None):
-        """The main loop of documentation collection.
-        """
+        """The main loop of documentation collection."""
         if self.__progress and self.__progress.is_canceled():
             return
 
         try:
             next(self.__gen)
-            Clock.schedule_once(self._fill_tree, .01)
+            Clock.schedule_once(self._fill_tree, 0.01)
         except StopIteration:
             self._load_complete()
         except Exception as e:
@@ -302,18 +320,16 @@ class ObjectInspector(TreeView):
             self._load_complete()
 
     def _load_complete(self):
-        """Performing the final steps
-        """
+        """Performing the final steps"""
         self.info.text = self.__root_module_node.doc
         if self.__progress:
-            self.__progress.complete(show_time=0, text='')
+            self.__progress.complete(show_time=0, text="")
             self.__progress = None
         self.__gen = None
 
     def load_documentation(self, pdt=None):
-        """Preparations for collecting documentation.
-        """
-        if self.module_name == '' or self.__gen is not None:
+        """Preparations for collecting documentation."""
+        if self.module_name == "" or self.__gen is not None:
             return
 
         # importing specified module
@@ -331,7 +347,7 @@ class ObjectInspector(TreeView):
             XError(text=str(e))
             return
         except Exception as e:
-            XError(text='Unexpected exception\nReason: %s' % str(e))
+            XError(text="Unexpected exception\nReason: %s" % str(e))
             return
 
         # clearing the tree
@@ -342,8 +358,9 @@ class ObjectInspector(TreeView):
         # starting the process
         self.__progress = XProgress(
             buttons=[],
-            text='Loading documentation...',
-            title='Module "%s"' % self.module_name)
+            text="Loading documentation...",
+            title='Module "%s"' % self.module_name,
+        )
         self.__progress.autoprogress()
         self.__gen = self._create_module_node(module)
         self._fill_tree()
@@ -356,29 +373,29 @@ class DocBrowser(BoxLayout):
     """
 
     module_name = StringProperty(__name__)
-    '''Represents module name. Use it to automatically load documentation when
+    """Represents module name. Use it to automatically load documentation when
     the widget created.
 
     :attr:`module_name` is a :class:`~kivy.properties.StringProperty` and
     defaults to __name__.
-    '''
+    """
 
     functions = BooleanProperty(True)
-    '''Enables/disables display of module functions in the object inspector.
+    """Enables/disables display of module functions in the object inspector.
 
     :attr:`functions` is a :class:`~kivy.properties.BooleanProperty` and
     defaults to True.
-    '''
+    """
 
     imported = BooleanProperty(False)
-    '''Enables/disables display of imported modules in the object inspector.
+    """Enables/disables display of imported modules in the object inspector.
 
     :attr:`module_name` is a :class:`~kivy.properties.BooleanProperty` and
     defaults to False.
-    '''
+    """
 
     methods = BooleanProperty(False)
-    '''Enables/disables display of class methods in the object inspector.
+    """Enables/disables display of class methods in the object inspector.
 
     .. warning::
 
@@ -387,17 +404,16 @@ class DocBrowser(BoxLayout):
 
     :attr:`methods` is a :class:`~kivy.properties.BooleanProperty` and
     defaults to False.
-    '''
+    """
 
     def __init__(self, **kwargs):
         super(DocBrowser, self).__init__(**kwargs)
         self.load_doc()
 
     def load_doc(self):
-        """Callback for the "Load doc" button.
-        """
+        """Callback for the "Load doc" button."""
         self.ids.inspector.module_name = self.ids.inp_module_name.text
-        Clock.schedule_once(self.ids.inspector.load_documentation, .1)
+        Clock.schedule_once(self.ids.inspector.load_documentation, 0.1)
 
 
 class DocBrowserApp(App):
@@ -406,25 +422,26 @@ class DocBrowserApp(App):
     more information.
     """
 
-    title = StringProperty('Documentation browser')
-    '''Title of the app.
-    '''
+    title = StringProperty("Documentation browser")
+    """Title of the app.
+    """
 
-    module_name = StringProperty('')
-    '''Represents module name. Use it to automatically load documentation when
+    module_name = StringProperty("")
+    """Represents module name. Use it to automatically load documentation when
     the app starts.
-    '''
+    """
 
     def build(self):
         return DocBrowser(module_name=self.module_name)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import sys
     import kivy
-    kivy.require('1.9.1')
 
-    module_name = 'kivy'
+    kivy.require("1.9.1")
+
+    module_name = "kivy"
     if len(sys.argv) > 1:
         module_name = sys.argv[1]
 

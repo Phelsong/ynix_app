@@ -9,6 +9,8 @@ readme = "README.md"
 repository = "https://github.com/Phelsong/ynix_app"
 packages = [
     { include = "pages" },
+    { include = "custom_widgets" },
+    { include = "kv" },
 ]
 
 [tool.poetry.dependencies]
