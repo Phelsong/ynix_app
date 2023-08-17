@@ -59,14 +59,17 @@ class LoginScreen(Screen):
 
     def __init__(self, **kwargs):
         super(LoginScreen, self).__init__(**kwargs)
+        print(self.children)
         self.add_widget(self.layout)
         self.add_widget(self.user_name_label)
         self.add_widget(self.user_input)
         self.add_widget(self.password_label)
         self.add_widget(self.password_input)
-
-        #
-
         self.add_widget(self.login_button)
 
-        # self.login_button.bind(on_release=change_screen)
+        def handle_click(self) -> None:
+            print(self.parent.user_input.text)
+            print(self.parent.password_input.text)
+            print(self.parent.children)
+
+        self.login_button.bind(on_release=handle_click)

@@ -28,6 +28,6 @@ class WikiScreen(Screen):
     def __init__(self, **kwargs):
         super(WikiScreen, self).__init__(**kwargs)
 
-        self.add_widget(self.layout)
+        self.add_widget(widget=self.layout)
         self.add_widget(widget=self.title)
         self.add_widget(widget=self.button)
