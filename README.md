@@ -1,4 +1,4 @@
-# Project_Ynix
+**# Project_Ynix
 
 ## Stack
 
@@ -11,4 +11,4 @@
 
 # Links
 * https://github.com/Phelsong/ynix_app
-* https://github.com/Phelsong/ynix_b
+* https://github.com/Phelsong/ynix_b**

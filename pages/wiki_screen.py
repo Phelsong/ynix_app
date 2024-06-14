@@ -18,7 +18,10 @@ class WikiScreen(Screen):
 
     # Builder.load_file(f"{os.getcwd()}/kv/wiki.kv")
     layout = StackLayout(orientation="lr-tb", spacing=[10, 10])
-    title = Label(text="Test Wiki Page", font_size="18sp")
+
+    with open(f"{os.getcwd()}/data/wiki_page1.txt") as f:
+        title = Label(text=f.read(), font_size="18sp")
+
     button = Button(
         text="Click Me",
         size_hint=[0.2, 0.1],

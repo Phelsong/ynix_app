@@ -21,9 +21,9 @@ class LoginScreen(Screen):
     # Builder.load_file(f"{os.getcwd()}/kv/login_screen.kv")
     layout = GridLayout(
         cols=1,
-        col_default_width="50sp",
+        col_default_width="100sp",
         rows=6,
-        row_default_height="50sp",
+        row_default_height="100sp",
         padding=120,
         spacing=8,
     )

@@ -2,37 +2,25 @@
 name = "Project_Ynix"
 version = "0.1.0"
 description = "???"
-authors = [
-    "Josh S Wilkinson <JoshsWilkinson@Outlook.com>",
-]
+authors = ["Josh S Wilkinson <JoshsWilkinson@Outlook.com>"]
 readme = "README.md"
 repository = "https://github.com/Phelsong/ynix_app"
-packages = [
-    { include = "pages" },
-    { include = "custom_widgets" },
-    { include = "kv" },
-]
+packages = [{ include = "pages" }, { include = "custom_widgets" }]
 
 [tool.poetry.dependencies]
-python = ">=3.10.6,<3.12"
-pendulum = "^2.1"
-Kivy = ">=2.2.1" # Kivy 2.1 doesnt build with py3.11 (yet)
-httpx = { extras = [
-    "http2",
-], version = "^0.23.0" }
-ujson = "^5.5.0"
+python = ">=3.10.6,<3.13"
+Kivy = { extras = ["full"], version = "^2.3.0" }
+httpx = { extras = ["http2"], version = ">=0.23.0" }
+orjson = ">=3.10.5"
 
 [tool.poetry.dev-dependencies]
+black = ">=22.8.0"
+cython = ">=3.0.0"
+ipykernel = ">=6.24.0"
 
-[tool.poetry.group.dev.dependencies]
-black = "^22.8.0"
-cython = "3.0.0b2"
-ipykernel = "^6.24.0"
 
 [build-system]
-requires = [
-    "poetry-core>=1.4.0",
-]
+requires = ["poetry-core>=1.4.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]

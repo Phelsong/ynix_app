@@ -18,7 +18,7 @@ from custom_widgets.attacker_settings_form import AttackerInput
 class SimSettingsScreen(Screen):
     """Sim Settings Page"""
 
-    Builder.load_file(f"{os.getcwd()}/kv/sim_settings_screen.kv")
+    # Builder.load_file(f"{os.getcwd()}/kv/sim_settings_screen.kv")
     layout = GridLayout(rows=3, cols=3)
     title = Label(
         text="Sim Settings",
@@ -37,7 +37,7 @@ class SimSettingsScreen(Screen):
         self.form = AttackerInput(
             cols=1,
             rows=24,
-            padding="5sp",
+            padding="10sp",
             size_hint=(0.8, 0.5),
             pos_hint={"center_x": 0.5, "center_y": 0.7},
             spacing=["30sp", "30sp"],
